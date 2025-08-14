@@ -113,6 +113,7 @@
             txtIdentificacion.Name = "txtIdentificacion";
             txtIdentificacion.Size = new Size(245, 27);
             txtIdentificacion.TabIndex = 5;
+            txtIdentificacion.TextChanged += txtIdentificacion_TextChanged;
             txtIdentificacion.KeyPress += txtIdentificacion_KeyPress;
             txtIdentificacion.Validating += txtIdentificacion_Validating;
             // 

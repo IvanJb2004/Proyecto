@@ -1,4 +1,5 @@
-﻿namespace Proyecto
+﻿
+namespace Proyecto
 {
     partial class Actualizar
     {
@@ -47,10 +48,12 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox1 = new PictureBox();
-            btnActualizar = new Button();
             btnLimpiar = new Button();
             label10 = new Label();
             label11 = new Label();
+            btnActualizar = new Button();
+            button1 = new Button();
+            label12 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -232,17 +235,6 @@
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
-            // btnActualizar
-            // 
-            btnActualizar.BackgroundImage = Properties.Resources.actualizar;
-            btnActualizar.BackgroundImageLayout = ImageLayout.Zoom;
-            btnActualizar.Location = new Point(246, 460);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(98, 91);
-            btnActualizar.TabIndex = 42;
-            btnActualizar.UseVisualStyleBackColor = true;
-            btnActualizar.Click += btnActualizar_Click;
-            // 
             // btnLimpiar
             // 
             btnLimpiar.BackgroundImage = Properties.Resources.goma_de_borrar;
@@ -274,16 +266,51 @@
             label11.TabIndex = 45;
             label11.Text = "Limpiar";
             // 
+            // btnActualizar
+            // 
+            btnActualizar.BackgroundImage = Properties.Resources.actualizar;
+            btnActualizar.BackgroundImageLayout = ImageLayout.Zoom;
+            btnActualizar.Location = new Point(246, 460);
+            btnActualizar.Name = "btnActualizar";
+            btnActualizar.Size = new Size(98, 91);
+            btnActualizar.TabIndex = 46;
+            btnActualizar.UseVisualStyleBackColor = true;
+            btnActualizar.Click += btnActualizar_Click_1;
+            // 
+            // button1
+            // 
+            button1.BackgroundImage = Properties.Resources.actualizar;
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.Location = new Point(93, 460);
+            button1.Name = "button1";
+            button1.Size = new Size(98, 91);
+            button1.TabIndex = 47;
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Arial", 9F, FontStyle.Underline);
+            label12.Location = new Point(108, 558);
+            label12.Name = "label12";
+            label12.Size = new Size(55, 17);
+            label12.TabIndex = 48;
+            label12.Text = "Buscar";
+            label12.Click += label12_Click;
+            // 
             // Actualizar
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(727, 596);
+            Controls.Add(label12);
+            Controls.Add(button1);
+            Controls.Add(btnActualizar);
             Controls.Add(label11);
             Controls.Add(label10);
             Controls.Add(btnLimpiar);
-            Controls.Add(btnActualizar);
             Controls.Add(btnVolver);
             Controls.Add(txtCorreo);
             Controls.Add(txtTelefono);
@@ -311,6 +338,11 @@
             PerformLayout();
         }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         private Button btnVolver;
@@ -332,9 +364,11 @@
         private Label label2;
         private Label label1;
         private PictureBox pictureBox1;
-        private Button btnActualizar;
         private Button btnLimpiar;
         private Label label10;
         private Label label11;
+        private Button btnActualizar;
+        private Button button1;
+        private Label label12;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,10 +76,10 @@ namespace Proyecto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             btnGuardar.Enabled = false;
-            SqlConnection conecta = Conexion.ConectarSQL();
-            string query = " INSERT INTO usuario (IDENTIFICACION,NOMBRE,APELLIDO, USUARIO,CONTRASEÑA,CELULAR,EMAIL)VALUES(@IDENTIFICACION,@NOMBRE,@APELLIDO,@USUARIO,@CONTRASEÑA,@CELULAR,@EMAIL)";
+            MySqlConnection conecta = Conexion.ConectarSQL();
+            string query = " INSERT INTO usuario (IDENTIFICACION,NOMBRE,APELLIDO, USUARIO,CONTRASENA,CELULAR,EMAIL)VALUES(@IDENTIFICACION,@NOMBRE,@APELLIDO,@USUARIO,@CONTRASEÑA,@CELULAR,@EMAIL)";
 
-            SqlCommand cmd = new SqlCommand(query, conecta);
+            MySqlCommand cmd = new MySqlCommand(query, conecta);
             cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
             cmd.Parameters.AddWithValue("@NOMBRE", txtNombre.Text);
             cmd.Parameters.AddWithValue("@APELLIDO", txtApellido.Text);
@@ -90,6 +91,9 @@ namespace Proyecto
             if (cmd.ExecuteNonQuery() > 0)
             {
                 MessageBox.Show("datos guardado exitosamente", "informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Hide();
+                Inicio inicio = new Inicio();
+                inicio.ShowDialog();
             }
         }
 

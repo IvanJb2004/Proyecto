@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,11 +22,11 @@ namespace Proyecto
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            SqlConnection guardar = Conexion.ConectarSQL();
-            string query = "INSERT INTO computador (IDENTIFICACION,TIPO_DE_DISPOSITIVO,MARCA,SERIE,COLOR)" +
+            MySqlConnection guardar = Conexion.ConectarSQL();
+            string query = "INSERT INTO computador (IDENTIFICACION,TIPODEDISPOSITIVO,MARCA,SERIE,COLOR)" +
                 "VALUES(@IDENTIFICACION,@TIPO_DE_DISPOSITIVO,@MARCA,@SERIE,@COLOR)";
 
-            SqlCommand cmd = new SqlCommand(query, guardar);
+            MySqlCommand cmd = new MySqlCommand(query, guardar);
             cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
             cmd.Parameters.AddWithValue("@TIPO_DE_DISPOSITIVO", cmbDispositivo.Text);
             cmd.Parameters.AddWithValue("@MARCA", txtMarca.Text);
@@ -35,6 +36,9 @@ namespace Proyecto
 
             {
                 MessageBox.Show("los datos se han guardado exitosamente", "informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Hide();
+                Ingreso usuario = new Ingreso();
+                usuario.ShowDialog();
             }
         }
 

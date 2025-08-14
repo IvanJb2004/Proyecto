@@ -1,3 +1,4 @@
+using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 
 namespace Proyecto
@@ -13,12 +14,12 @@ namespace Proyecto
         {
             try
             {
-                string query = "SELECT USUARIO,CONTRASEÑA FROM usuario WHERE USUARIO=@USUARIO AND CONTRASEÑA=@CONTRASEÑA";
-                SqlConnection conexionn = Conexion.ConectarSQL();
-                SqlCommand cmd = new SqlCommand(query, conexionn);
+                string query = "SELECT USUARIO,CONTRASENA FROM usuario WHERE USUARIO=@USUARIO AND CONTRASENA=@CONTRASEÑA";
+                MySqlConnection conexionn = Conexion.ConectarSQL();
+                MySqlCommand cmd = new MySqlCommand(query, conexionn);
                 cmd.Parameters.AddWithValue("USUARIO", txtUsuario.Text);
                 cmd.Parameters.AddWithValue("CONTRASEÑA", txtContraseña.Text);
-                SqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
 
@@ -69,12 +70,12 @@ namespace Proyecto
             {
                 try
                 {
-                    string query = "SELECT usuario,contraseña FROM usuario WHERE usuario=@usuario AND contraseña=@contraseña";
-                    SqlConnection conexionnnn = Conexion.ConectarSQL();
-                    SqlCommand cmd = new SqlCommand(query, conexionnnn);
+                    string query = "SELECT usuario,contrasena FROM usuario WHERE usuario=@usuario AND contrasena=@contraseña";
+                    MySqlConnection conexionnnn = Conexion.ConectarSQL();
+                    MySqlCommand cmd = new MySqlCommand(query, conexionnnn);
                     cmd.Parameters.AddWithValue("usuario", txtUsuario.Text);
                     cmd.Parameters.AddWithValue("contraseña", txtContraseña.Text);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    MySqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
 

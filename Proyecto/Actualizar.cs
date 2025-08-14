@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -73,43 +74,6 @@ namespace Proyecto
             validarcampos();
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            btnActualizar.Enabled = false;
-            string query = "UPDATE usuario SET " +
-               "NOMBRE=@NOMBRE,APELLIDO=@APELLIDO,USUARIO=@USUARIO,CONTRASEÑA=@CONTRASEÑA,CELULAR=@CELULAR,EMAIL=@EMAIL WHERE " +
-               "IDENTIFICACION=@IDENTIFICACION";
-            SqlConnection conexio = new SqlConnection();
-
-            try
-            {
-                conexio = Conexion.ConectarSQL();
-                SqlCommand cmd = new SqlCommand(query, conexio);
-                cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
-                cmd.Parameters.AddWithValue("@NOMBRE", txtNombre.Text);
-                cmd.Parameters.AddWithValue("@APELLIDO", txtApellido.Text);
-                cmd.Parameters.AddWithValue("@USUARIO", txtUsuario.Text);
-                cmd.Parameters.AddWithValue("@CONTRASEÑA", txtContraseña.Text);
-                cmd.Parameters.AddWithValue("@CELULAR", txtTelefono.Text);
-                cmd.Parameters.AddWithValue("@EMAIL", txtCorreo.Text);
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    MessageBox.Show("datos actualizado", "informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("se ha presentado un error" + ex.Message);
-
-            }
-            finally
-            {
-                conexio.Close();
-            }
-        }
-
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -124,32 +88,7 @@ namespace Proyecto
 
         private void txtIdentificacion_Validating(object sender, CancelEventArgs e)
         {
-            try
-            {
-
-                string query = "SELECT IDENTIFICACION, NOMBRE,APELLIDO,USUARIO, CONTRASEÑA,CELULAR,EMAIL FROM usuario WHERE IDENTIFICACION=@IDENTIFICACION";
-
-                SqlConnection conexionn = Conexion.ConectarSQL();
-                SqlCommand cmd = new SqlCommand(query, conexionn);
-                cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
-                SqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    txtIdentificacion.Text = reader["IDENTIFICACION"].ToString();
-                    txtNombre.Text = reader["NOMBRE"].ToString();
-                    txtApellido.Text = reader["APELLIDO"].ToString();
-                    txtUsuario.Text = reader["USUARIO"].ToString();
-                    txtContraseña.Text = reader["CONTRASEÑA"].ToString();
-                    txtTelefono.Text = reader["CELULAR"].ToString();
-                    txtCorreo.Text = reader["EMAIL"].ToString();
-                }
-
-            }
-            catch
-            {
-                MessageBox.Show("se ha presentado un error");
-            }
+            
         }
 
         private void txtIdentificacion_TextChanged(object sender, EventArgs e)
@@ -175,6 +114,80 @@ namespace Proyecto
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
             validarcampos();
+        }
+
+        private void btnActualizar_Click_1(object sender, EventArgs e)
+        {
+            btnActualizar.Enabled = false;
+            string query = "UPDATE usuario SET " +
+               "NOMBRE=@NOMBRE,APELLIDO=@APELLIDO,USUARIO=@USUARIO,CONTRASENA=@CONTRASEÑA,CELULAR=@CELULAR,EMAIL=@EMAIL WHERE " +
+               "IDENTIFICACION=@IDENTIFICACION";
+            MySqlConnection conexion = new MySqlConnection();
+
+            try
+            {
+                conexion = Conexion.ConectarSQL();
+                MySqlCommand cmd = new MySqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
+                cmd.Parameters.AddWithValue("@NOMBRE", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@APELLIDO", txtApellido.Text);
+                cmd.Parameters.AddWithValue("@USUARIO", txtUsuario.Text);
+                cmd.Parameters.AddWithValue("@CONTRASEÑA", txtContraseña.Text);
+                cmd.Parameters.AddWithValue("@CELULAR", txtTelefono.Text);
+                cmd.Parameters.AddWithValue("@EMAIL", txtCorreo.Text);
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("datos actualizado", "informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    Menu menu = new Menu();
+                    menu.ShowDialog();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("se ha presentado un error" + ex.Message);
+
+            }
+            finally
+            {
+                conexion.Close();
+            }
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                string query = "SELECT IDENTIFICACION, NOMBRE,APELLIDO,USUARIO, CONTRASENA,CELULAR,EMAIL FROM usuario WHERE IDENTIFICACION=@IDENTIFICACION";
+
+                MySqlConnection conexionn = Conexion.ConectarSQL();
+                MySqlCommand cmd = new MySqlCommand(query, conexionn);
+                cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    txtIdentificacion.Text = reader["IDENTIFICACION"].ToString();
+                    txtNombre.Text = reader["NOMBRE"].ToString();
+                    txtApellido.Text = reader["APELLIDO"].ToString();
+                    txtUsuario.Text = reader["USUARIO"].ToString();
+                    txtContraseña.Text = reader["CONTRASENA"].ToString();
+                    txtTelefono.Text = reader["CELULAR"].ToString();
+                    txtCorreo.Text = reader["EMAIL"].ToString();
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("se ha presentado un error");
+            }
         }
     }
 }

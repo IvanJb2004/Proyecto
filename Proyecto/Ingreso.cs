@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic.Devices;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,36 +47,23 @@ namespace Proyecto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            SqlConnection conecta = new SqlConnection();
+            MySqlConnection conecta = new MySqlConnection();
             int ID_REGISTRO = 0;
             try
             {
-
-
-
-
                 conecta = Conexion.ConectarSQL();
                 string query = "INSERT INTO ingreso (IDENTIFICACION,ESTADO,FECHA,HORA)" +
-                    "VALUES(@IDENTIFICACION,@ESTADO,@FECHA,@HORA); SELECT SCOPE_IDENTITY();";
-                SqlCommand cmd = new SqlCommand(query, conecta);
+                    "VALUES(@IDENTIFICACION,@ESTADO,@FECHA,@HORA)";
+                MySqlCommand cmd = new MySqlCommand(query, conecta);
                 cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
                 cmd.Parameters.AddWithValue("@ESTADO", txtEstado.SelectedIndex);
                 cmd.Parameters.AddWithValue("@FECHA", dtFecha.Value.ToShortDateString());
                 cmd.Parameters.AddWithValue("@HORA", dtFecha.Value.ToShortTimeString());
                 ID_REGISTRO = Convert.ToInt32(cmd.ExecuteScalar());
 
-
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    MessageBox.Show("Guardado Exitosamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                }
-
-
-
             }
             catch (Exception ex)
-            {   
+            {
                 MessageBox.Show(ex.Message);
             }
             finally
@@ -98,22 +86,25 @@ namespace Proyecto
                         seleccion(guardarinf);
 
                     }
-
+                    MessageBox.Show("Guardado Exitosamente", "Informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+                    Menu menu = new Menu();
+                    menu.ShowDialog();
                 }
             }
 
         }
         void seleccion(guardarinfo guardarinf)
         {
-            SqlConnection cnn = new SqlConnection();
+            MySqlConnection cnn = new MySqlConnection();
             try
             {
                 cnn = Conexion.ConectarSQL();
-                string query = "INSERT INTO entradapc (ID_INGRESO,TIPO_DE_DISPOSITIVO,SERIE,MOUSE,CARGADOR)" +
+                string query = "INSERT INTO entradapc (IDINGRESO,TIPODEDISPOSITIVO,SERIE,MOUSE,CARGADOR)" +
                     "VALUES(@ID_INGRESO,@TIPO_DE_DISPOSITIVO,@SERIE,@MOUSE,@CARGADOR)";
 
 
-                SqlCommand cmd = new SqlCommand(query, cnn);
+                MySqlCommand cmd = new MySqlCommand(query, cnn);
 
                 cmd.Parameters.AddWithValue("@ID_INGRESO", guardarinf.ID_REGISTRO);
                 cmd.Parameters.AddWithValue("@TIPO_DE_DISPOSITIVO", guardarinf.Dispositivo);
@@ -138,16 +129,16 @@ namespace Proyecto
 
         private void txtIdentificacion_Validating(object sender, CancelEventArgs e)
         {
-            SqlConnection conexionn = new SqlConnection();
+            MySqlConnection conexionn = new MySqlConnection();
 
             try
             {
                 string query = "SELECT IDENTIFICACION,NOMBRE,APELLIDO,TIPODEUSUARIO FROM diseño WHERE IDENTIFICACION=@IDENTIFICACION";
 
                 conexionn = Conexion.ConectarSQL();
-                SqlCommand cmd = new SqlCommand(query, conexionn);
+                MySqlCommand cmd = new MySqlCommand(query, conexionn);
                 cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
-                SqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -165,15 +156,15 @@ namespace Proyecto
             }
             try
             {
-                string computadores = "SELECT TIPO_DE_DISPOSITIVO,MARCA,SERIE FROM computador " +
+                string computadores = "SELECT TIPODEDISPOSITIVO,MARCA,SERIE FROM computador " +
                     " WHERE IDENTIFICACION=@IDENTIFICACION ";
                 conexionn = Conexion.ConectarSQL();
-                SqlCommand pvd = new SqlCommand(computadores, conexionn);
+                MySqlCommand pvd = new MySqlCommand(computadores, conexionn);
                 pvd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
-                SqlDataReader reader = pvd.ExecuteReader();
+                MySqlDataReader reader = pvd.ExecuteReader();
                 while (reader.Read())
                 {
-                    info.Rows.Add(reader["TIPO_DE_DISPOSITIVO"], reader["MARCA"], reader["SERIE"]);
+                    info.Rows.Add(reader["TIPODEDISPOSITIVO"], reader["MARCA"], reader["SERIE"]);
 
                 }
             }
@@ -208,7 +199,12 @@ namespace Proyecto
 
         private void txtEstado_SelectedIndexChanged(object sender, EventArgs e)
         {
-       
+
+        }
+
+        private void txtIdentificacion_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

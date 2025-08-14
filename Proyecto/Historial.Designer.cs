@@ -96,7 +96,7 @@
             info.Location = new Point(-5, 203);
             info.Name = "info";
             info.RowHeadersWidth = 51;
-            info.Size = new Size(1236, 273);
+            info.Size = new Size(1431, 273);
             info.TabIndex = 4;
             info.CellContentClick += info_CellContentClick;
             // 
@@ -215,7 +215,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1243, 540);
+            ClientSize = new Size(1428, 540);
             Controls.Add(btnBuscar);
             Controls.Add(button1);
             Controls.Add(info);
