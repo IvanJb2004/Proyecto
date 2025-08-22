@@ -14,34 +14,44 @@ namespace Proyecto
         {
             try
             {
-                string query = "SELECT USUARIO,CONTRASENA FROM usuario WHERE USUARIO=@USUARIO AND CONTRASENA=@CONTRASEÑA";
-                MySqlConnection conexionn = Conexion.ConectarSQL();
-                MySqlCommand cmd = new MySqlCommand(query, conexionn);
-                cmd.Parameters.AddWithValue("USUARIO", txtUsuario.Text);
-                cmd.Parameters.AddWithValue("CONTRASEÑA", txtContraseña.Text);
+                MySqlConnection conexion = Conexion.ConectarSQL();
+                string query = "SELECT CONTRASENA FROM usuario WHERE USUARIO = @usuario";
+
+                MySqlCommand cmd = new MySqlCommand(query, conexion);
+                cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text);
+
                 MySqlDataReader reader = cmd.ExecuteReader();
+
                 if (reader.Read())
                 {
+                    string hashGuardado = reader["CONTRASENA"].ToString();
+                    string contraseñaIngresada = txtContraseña.Text.Trim();
 
+                    bool esValida = Encriptador.Verificar(contraseñaIngresada, hashGuardado);
 
-                    this.Hide();
-                    Menu form1 = new Menu();
-                    form1.ShowDialog();
+                    if (esValida)
+                    {
+                        this.Hide();
+                        Menu form1 = new Menu();
+                        form1.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Contraseña incorrecta");
+                        txtContraseña.Text = "";
+                    }
                 }
                 else
                 {
-
-                    MessageBox.Show(" el usuario o contraseña incorrecta");
+                    MessageBox.Show("Usuario no encontrado");
                     txtUsuario.Text = "";
                     txtContraseña.Text = "";
-
                 }
-
-
             }
-            catch { }
-            finally { }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

@@ -45,9 +45,10 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.descarga;
-            pictureBox1.Location = new Point(126, 74);
+            pictureBox1.Location = new Point(110, 56);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(223, 262);
+            pictureBox1.Size = new Size(195, 196);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -56,9 +57,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial Black", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(66, 23);
+            label1.Location = new Point(58, 17);
             label1.Name = "label1";
-            label1.Size = new Size(343, 48);
+            label1.Size = new Size(288, 38);
             label1.TabIndex = 1;
             label1.Text = "COMPLEJO TECNOLOGICO PARA LA\r\n     GESTION AGROEMPRESARIAL";
             // 
@@ -66,9 +67,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 9F, FontStyle.Bold);
-            label2.Location = new Point(126, 360);
+            label2.Location = new Point(110, 270);
             label2.Name = "label2";
-            label2.Size = new Size(84, 18);
+            label2.Size = new Size(65, 15);
             label2.TabIndex = 2;
             label2.Text = "USUARIO :";
             // 
@@ -76,25 +77,27 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 9F, FontStyle.Bold);
-            label3.Location = new Point(126, 440);
+            label3.Location = new Point(110, 330);
             label3.Name = "label3";
-            label3.Size = new Size(116, 18);
+            label3.Size = new Size(89, 15);
             label3.TabIndex = 3;
             label3.Text = "CONTRASEÑA:";
             // 
             // txtUsuario
             // 
-            txtUsuario.Location = new Point(126, 395);
+            txtUsuario.Location = new Point(110, 296);
+            txtUsuario.Margin = new Padding(3, 2, 3, 2);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(223, 27);
+            txtUsuario.Size = new Size(196, 23);
             txtUsuario.TabIndex = 4;
             txtUsuario.KeyPress += txtUsuario_KeyPress;
             // 
             // txtContraseña
             // 
-            txtContraseña.Location = new Point(126, 477);
+            txtContraseña.Location = new Point(110, 358);
+            txtContraseña.Margin = new Padding(3, 2, 3, 2);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.Size = new Size(223, 27);
+            txtContraseña.Size = new Size(196, 23);
             txtContraseña.TabIndex = 5;
             txtContraseña.UseSystemPasswordChar = true;
             txtContraseña.TextChanged += txtContraseña_TextChanged;
@@ -104,9 +107,10 @@
             // 
             btnIniciarSesion.BackgroundImage = Properties.Resources.iniciar_sesion;
             btnIniciarSesion.BackgroundImageLayout = ImageLayout.Zoom;
-            btnIniciarSesion.Location = new Point(126, 526);
+            btnIniciarSesion.Location = new Point(109, 394);
+            btnIniciarSesion.Margin = new Padding(3, 2, 3, 2);
             btnIniciarSesion.Name = "btnIniciarSesion";
-            btnIniciarSesion.Size = new Size(95, 85);
+            btnIniciarSesion.Size = new Size(83, 64);
             btnIniciarSesion.TabIndex = 6;
             btnIniciarSesion.UseVisualStyleBackColor = true;
             btnIniciarSesion.Click += btnIniciarSesion_Click;
@@ -115,9 +119,9 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            label4.Location = new Point(126, 614);
+            label4.Location = new Point(110, 460);
             label4.Name = "label4";
-            label4.Size = new Size(95, 17);
+            label4.Size = new Size(82, 15);
             label4.TabIndex = 7;
             label4.Text = "Iniciar Sesion";
             // 
@@ -125,9 +129,10 @@
             // 
             btnRegistrar.BackgroundImage = Properties.Resources.registro;
             btnRegistrar.BackgroundImageLayout = ImageLayout.Zoom;
-            btnRegistrar.Location = new Point(256, 526);
+            btnRegistrar.Location = new Point(224, 394);
+            btnRegistrar.Margin = new Padding(3, 2, 3, 2);
             btnRegistrar.Name = "btnRegistrar";
-            btnRegistrar.Size = new Size(93, 85);
+            btnRegistrar.Size = new Size(81, 64);
             btnRegistrar.TabIndex = 8;
             btnRegistrar.UseVisualStyleBackColor = true;
             btnRegistrar.Click += btnRegistrar_Click;
@@ -136,18 +141,19 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial", 9F, FontStyle.Underline, GraphicsUnit.Point, 0);
-            label5.Location = new Point(239, 614);
+            label5.Location = new Point(209, 460);
             label5.Name = "label5";
-            label5.Size = new Size(122, 17);
+            label5.Size = new Size(105, 15);
             label5.TabIndex = 9;
             label5.Text = "Registrar Usuario";
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(354, 481);
+            checkBox1.Location = new Point(310, 361);
+            checkBox1.Margin = new Padding(3, 2, 3, 2);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(82, 24);
+            checkBox1.Size = new Size(67, 19);
             checkBox1.TabIndex = 10;
             checkBox1.Text = "Mostrar";
             checkBox1.UseVisualStyleBackColor = true;
@@ -155,10 +161,10 @@
             // 
             // Inicio
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(459, 679);
+            ClientSize = new Size(402, 509);
             Controls.Add(checkBox1);
             Controls.Add(label5);
             Controls.Add(btnRegistrar);
@@ -170,6 +176,7 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "Inicio";
             Text = "Inicio";
             Load += Inicio_Load;

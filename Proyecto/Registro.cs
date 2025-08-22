@@ -76,21 +76,28 @@ namespace Proyecto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             btnGuardar.Enabled = false;
+
             MySqlConnection conecta = Conexion.ConectarSQL();
-            string query = " INSERT INTO usuario (IDENTIFICACION,NOMBRE,APELLIDO, USUARIO,CONTRASENA,CELULAR,EMAIL)VALUES(@IDENTIFICACION,@NOMBRE,@APELLIDO,@USUARIO,@CONTRASEÑA,@CELULAR,@EMAIL)";
+            string query = "INSERT INTO usuario (IDENTIFICACION, NOMBRE, APELLIDO, USUARIO, CONTRASENA, CELULAR, EMAIL) " +
+                           "VALUES (@IDENTIFICACION, @NOMBRE, @APELLIDO, @USUARIO, @CONTRASEÑA, @CELULAR, @EMAIL)";
 
             MySqlCommand cmd = new MySqlCommand(query, conecta);
             cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);
             cmd.Parameters.AddWithValue("@NOMBRE", txtNombre.Text);
             cmd.Parameters.AddWithValue("@APELLIDO", txtApellido.Text);
             cmd.Parameters.AddWithValue("@USUARIO", txtUsuario.Text);
-            cmd.Parameters.AddWithValue("@CONTRASEÑA", txtContraseña.Text);
+
+            // 🔐 Encriptar la contraseña antes de guardarla
+            string contraseñaPlano = txtContraseña.Text;
+            string contraseñaEncriptada = Encriptador.Encriptar(contraseñaPlano);
+            cmd.Parameters.AddWithValue("@CONTRASEÑA", contraseñaEncriptada);
+
             cmd.Parameters.AddWithValue("@CELULAR", txtTelefono.Text);
             cmd.Parameters.AddWithValue("@EMAIL", txtCorreo.Text);
 
             if (cmd.ExecuteNonQuery() > 0)
             {
-                MessageBox.Show("datos guardado exitosamente", "informacion", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Datos guardados exitosamente", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide();
                 Inicio inicio = new Inicio();
                 inicio.ShowDialog();
