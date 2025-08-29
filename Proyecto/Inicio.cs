@@ -17,29 +17,34 @@ namespace Proyecto
                 string usuario = txtUsuario.Text.Trim();
                 string contraseñaIngresada = txtContraseña.Text.Trim();
 
-                // Encriptar la contraseña ingresada (solo válido si usas hash determinístico)
-                string hashIngresado = Encriptador.Encriptar(contraseñaIngresada); // SHA256, por ejemplo
-
-                MySqlConnection conexion = Conexion.ConectarSQL();
-                string query = "SELECT * FROM usuario WHERE USUARIO = @usuario AND CONTRASENA = @contrasena";
-
-                MySqlCommand cmd = new MySqlCommand(query, conexion);
-                cmd.Parameters.AddWithValue("@usuario", usuario);
-                cmd.Parameters.AddWithValue("@contrasena", hashIngresado);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                using (MySqlConnection conexion = Conexion.ConectarSQL())
                 {
-                    this.Hide();
-                    Menu form1 = new Menu();
-                    form1.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Usuario o contraseña incorrectos");
-                    txtUsuario.Text = "";
-                    txtContraseña.Text = "";
+                    string query = "SELECT CONTRASENA FROM usuario WHERE USUARIO = @usuario";
+                    MySqlCommand cmd = new MySqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string hashGuardado = reader.GetString("CONTRASENA");
+
+                            if (Encriptador.Verificar(contraseñaIngresada, hashGuardado))
+                            {
+                                this.Hide();
+                                Menu form1 = new Menu();
+                                form1.ShowDialog();
+                            }
+                            else
+                            {
+                                MostrarError();
+                            }
+                        }
+                        else
+                        {
+                            MostrarError();
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -47,6 +52,13 @@ namespace Proyecto
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+        private void MostrarError()
+        {
+            MessageBox.Show("Usuario o contraseña incorrectos");
+            txtUsuario.Text = "";
+            txtContraseña.Text = "";
+        }
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
