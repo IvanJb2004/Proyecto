@@ -14,31 +14,38 @@ namespace Proyecto
         {
             try
             {
-                string query = "SELECT USUARIO,CONTRASENA FROM usuario WHERE USUARIO=@USUARIO AND CONTRASENA=@CONTRASEÑA";
-                MySqlConnection conexionn = Conexion.ConectarSQL();
-                MySqlCommand cmd = new MySqlCommand(query, conexionn);
-                cmd.Parameters.AddWithValue("USUARIO", txtUsuario.Text);
-                cmd.Parameters.AddWithValue("CONTRASEÑA", txtContraseña.Text);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                string usuario = txtUsuario.Text.Trim();
+                string contraseñaIngresada = txtContraseña.Text.Trim();
+
+                using (MySqlConnection conexion = Conexion.ConectarSQL())
                 {
+                    string query = "SELECT CONTRASENA FROM usuario WHERE USUARIO = @usuario";
+                    MySqlCommand cmd = new MySqlCommand(query, conexion);
+                    cmd.Parameters.AddWithValue("@usuario", usuario);
 
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string hashGuardado = reader.GetString("CONTRASENA");
 
-                    this.Hide();
-                    Menu form1 = new Menu();
-                    form1.ShowDialog();
+                            if (encryptar.Verificar(contraseñaIngresada, hashGuardado))
+                            {
+                                this.Hide();
+                                Menu form1 = new Menu();
+                                form1.ShowDialog();
+                            }
+                            
+                        }
+                        
+                    }
                 }
-                else
-                {
-
-                    MessageBox.Show(" el usuario o contraseña incorrecta");
-                    txtUsuario.Text = "";
-                    txtContraseña.Text = "";
-
-                }
-
-
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
+
             catch { }
             finally { }
 
@@ -70,6 +77,8 @@ namespace Proyecto
             {
                 try
                 {
+                    string usuario = txtUsuario.Text.Trim();
+                    string contraseñaIngresada = txtContraseña.Text.Trim();
                     string query = "SELECT usuario,contrasena FROM usuario WHERE usuario=@usuario AND contrasena=@contraseña";
                     MySqlConnection conexionnnn = Conexion.ConectarSQL();
                     MySqlCommand cmd = new MySqlCommand(query, conexionnnn);
@@ -78,11 +87,16 @@ namespace Proyecto
                     MySqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
+                        string hashGuardado = reader.GetString("CONTRASENA");
 
+                        if (encryptar.Verificar(contraseñaIngresada, hashGuardado))
+                        {
+                            this.Hide();
+                            Menu form1 = new Menu();
+                            form1.ShowDialog();
+                        }
 
-                        this.Hide();
-                        Menu form1 = new Menu();
-                        form1.ShowDialog();
+                      
                     }
 
                 }

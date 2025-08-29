@@ -84,7 +84,11 @@ namespace Proyecto
             cmd.Parameters.AddWithValue("@NOMBRE", txtNombre.Text);
             cmd.Parameters.AddWithValue("@APELLIDO", txtApellido.Text);
             cmd.Parameters.AddWithValue("@USUARIO", txtUsuario.Text);
-            cmd.Parameters.AddWithValue("@CONTRASEÑA", txtContraseña.Text);
+
+            string contraseñaPlano = txtContraseña.Text;
+            string contraseñaEncriptada = encryptar.Encriptar(contraseñaPlano);
+            cmd.Parameters.AddWithValue("@CONTRASEÑA", contraseñaEncriptada);
+
             cmd.Parameters.AddWithValue("@CELULAR", txtTelefono.Text);
             cmd.Parameters.AddWithValue("@EMAIL", txtCorreo.Text);
 
