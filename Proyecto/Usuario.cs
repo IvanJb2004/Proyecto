@@ -28,7 +28,7 @@ namespace Proyecto
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             MySqlConnection conecta = Conexion.ConectarSQL();
-            string query = " INSERT INTO diseño (IDENTIFICACION,NOMBRE,APELLIDO,TIPODEUSUARIO)VALUES(@IDENTIFICACION,@NOMBRE,@APELLIDO,@TIPODEUSUARIO)";
+            string query = " INSERT INTO usuario_pc (IDENTIFICACION,NOMBRE,APELLIDO,TIPODEUSUARIO)VALUES(@IDENTIFICACION,@NOMBRE,@APELLIDO,@TIPODEUSUARIO)";
 
             MySqlCommand cmd = new MySqlCommand(query, conecta);
             cmd.Parameters.AddWithValue("@IDENTIFICACION", txtIdentificacion.Text);

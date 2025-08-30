@@ -50,7 +50,7 @@ namespace Proyecto
                 "\r\nFROM entradapc INNER JOIN computador ON entradapc.SERIE = computador.SERIE)" +
                 "\r\nentradapc INNER JOIN ingreso \r\nON entradapc.IDINGRESO = ingreso.IDINGRESO " +
                 "WHERE ingreso.IDENTIFICACION = @IDENTIFICACION)" +
-                "\r\ningreso INNER JOIN diseño ON diseño.IDENTIFICACION = ingreso.IDENTIFICACION";
+                "\r\ningreso INNER JOIN usuario_pc ON usuario_pc.IDENTIFICACION = ingreso.IDENTIFICACION";
 
                 conexio = Conexion.ConectarSQL();
                 MySqlCommand cmd = new MySqlCommand(query, conexio);

@@ -12,6 +12,7 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MySql.Data" Version="9.4.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+    <PackageReference Include="WixToolset.VisualStudio.wixext" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
