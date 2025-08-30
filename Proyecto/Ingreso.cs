@@ -133,7 +133,7 @@ namespace Proyecto
 
             try
             {
-                string query = "SELECT IDENTIFICACION,NOMBRE,APELLIDO,TIPODEUSUARIO FROM diseño WHERE IDENTIFICACION=@IDENTIFICACION";
+                string query = "SELECT IDENTIFICACION,NOMBRE,APELLIDO,TIPODEUSUARIO FROM usuario_pc WHERE IDENTIFICACION=@IDENTIFICACION";
 
                 conexionn = Conexion.ConectarSQL();
                 MySqlCommand cmd = new MySqlCommand(query, conexionn);
