@@ -35,8 +35,18 @@ Antes de instalar la aplicación asegúrate de tener:
 2. Configura la cadena de conexión a MySQL con tus datos:  
 
    ```xml
-   <connectionStrings>
-       <add name="ConexionMySQL" 
-            connectionString="Server=TU_IP;Database=TU_DB;Uid=TU_USUARIO;Pwd=TU_PASSWORD;" 
-            providerName="MySql.Data.MySqlClient" />
-   </connectionStrings>
+   internal class Conexion 
+ {
+     public static MySqlConnection ConectarSQL()
+     {
+         
+         
+             string conectionstring = "SERVER=82.25.67.19;PORT=3306;DATABASE=u700978481_registro;UID=u700978481_sena;PWD=Faber271204*";
+
+             MySqlConnection connection = new MySqlConnection(conectionstring);
+
+
+         connection.Open();
+         return connection;
+     }
+ }
