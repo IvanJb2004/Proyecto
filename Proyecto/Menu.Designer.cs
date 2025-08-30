@@ -40,13 +40,13 @@
             info = new DataGridView();
             Nombres = new DataGridViewTextBoxColumn();
             Apellidos = new DataGridViewTextBoxColumn();
-            Fecha = new DataGridViewTextBoxColumn();
-            Hora = new DataGridViewTextBoxColumn();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
             Column3 = new DataGridViewTextBoxColumn();
             Mouse = new DataGridViewTextBoxColumn();
             Cargador = new DataGridViewTextBoxColumn();
+            Fecha = new DataGridViewTextBoxColumn();
+            Hora = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)info).BeginInit();
             SuspendLayout();
@@ -149,7 +149,7 @@
             // 
             info.BackgroundColor = Color.White;
             info.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            info.Columns.AddRange(new DataGridViewColumn[] { Nombres, Apellidos, Fecha, Hora, Column1, Column2, Column3, Mouse, Cargador });
+            info.Columns.AddRange(new DataGridViewColumn[] { Nombres, Apellidos, Column1, Column2, Column3, Mouse, Cargador, Fecha, Hora });
             info.Location = new Point(248, 28);
             info.Name = "info";
             info.RowHeadersWidth = 51;
@@ -170,20 +170,6 @@
             Apellidos.MinimumWidth = 6;
             Apellidos.Name = "Apellidos";
             Apellidos.Width = 125;
-            // 
-            // Fecha
-            // 
-            Fecha.HeaderText = "Fecha";
-            Fecha.MinimumWidth = 6;
-            Fecha.Name = "Fecha";
-            Fecha.Width = 125;
-            // 
-            // Hora
-            // 
-            Hora.HeaderText = "Hora";
-            Hora.MinimumWidth = 6;
-            Hora.Name = "Hora";
-            Hora.Width = 125;
             // 
             // Column1
             // 
@@ -223,6 +209,20 @@
             Cargador.Name = "Cargador";
             Cargador.Width = 125;
             // 
+            // Fecha
+            // 
+            Fecha.HeaderText = "Fecha";
+            Fecha.MinimumWidth = 6;
+            Fecha.Name = "Fecha";
+            Fecha.Width = 125;
+            // 
+            // Hora
+            // 
+            Hora.HeaderText = "Hora";
+            Hora.MinimumWidth = 6;
+            Hora.Name = "Hora";
+            Hora.Width = 125;
+            // 
             // Menu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -260,16 +260,16 @@
         private Button button1;
         private Label label5;
         private DataGridView info;
+        private DataGridViewComboBoxColumn Column5;
+        private DataGridViewComboBoxColumn Column6;
         private DataGridViewTextBoxColumn Nombres;
         private DataGridViewTextBoxColumn Apellidos;
-        private DataGridViewTextBoxColumn Fecha;
-        private DataGridViewTextBoxColumn Hora;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
-        private DataGridViewComboBoxColumn Column5;
-        private DataGridViewComboBoxColumn Column6;
         private DataGridViewTextBoxColumn Mouse;
         private DataGridViewTextBoxColumn Cargador;
+        private DataGridViewTextBoxColumn Fecha;
+        private DataGridViewTextBoxColumn Hora;
     }
 }

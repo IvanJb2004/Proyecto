@@ -51,7 +51,7 @@ namespace Proyecto
 
         private void Menu_Load(object sender, EventArgs e)
         {
-
+            CargarDatos();
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -61,21 +61,41 @@ namespace Proyecto
 
         private void info_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            
+        }
+        
+
+        private void CargarDatos()
+        {
+            info.Rows.Clear();
             MySqlConnection conexio = new MySqlConnection();
+
             try
             {
-                string query = "SELECT DISTINC d.NOMBRE, d.APELLIDO, c.TIPODEDISPOSITIVO, c.MARCA, c.SERIE, i.ESTADO, i.FECHA, i.HORA, e.MOUSE, e.CARGADOR  FROM diseño d INNER JOIN computador c ON c.IDENTIFICACION = d.IDENTIFICACION INNER JOIN ingreso i ON i.IDENTIFICACION  = c.IDENTIFICACION INNER JOIN entradapc e ON e.IDINGRESO = i.IDINGRESO WHERE i.ESTADO = '1' LIMIT 1;";
+                string query = @"SELECT u.NOMBRE, u.APELLIDO, c.TIPODEDISPOSITIVO, c.MARCA, c.SERIE, 
+                                i.ESTADO, i.FECHA, i.HORA, e.MOUSE, e.CARGADOR  
+                         FROM usuario_pc u 
+                         INNER JOIN computador c ON c.IDENTIFICACION = u.IDENTIFICACION 
+                         INNER JOIN ingreso i ON i.IDENTIFICACION = c.IDENTIFICACION 
+                         INNER JOIN entradapc e ON e.IDINGRESO = i.IDINGRESO 
+                         WHERE i.ESTADO = '1';";
+
                 conexio = Conexion.ConectarSQL();
                 MySqlCommand cmd = new MySqlCommand(query, conexio);
                 MySqlDataReader reader = cmd.ExecuteReader();
+
                 while (reader.Read())
                 {
-                  
-                    info.Rows.Add( reader["NOMBRE"], reader["APELLIDO"], reader["TIPODEDISPOSITIVO"],reader["MARCA"], 
-                                   reader["SERIE"], reader["MOUSE"], reader["CARGADOR"],reader["FECHA"], reader["HORA"]);
+                    info.Rows.Add(reader["NOMBRE"], reader["APELLIDO"], reader["TIPODEDISPOSITIVO"],
+                                  reader["MARCA"], reader["SERIE"], reader["MOUSE"],
+                                  reader["CARGADOR"], reader["FECHA"], reader["HORA"]);
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
+
     }
 }
